@@ -42,18 +42,21 @@ driverOutput stat =
     4 -> 0b1000
     _ -> 0b0000
 
-stepperMotor :: Signal Bool -> Signal Bool -> Signal (BitVector 4)
-stepperMotor dir en = output
+stepperMotor :: Signal (Bool,Bool) -> Signal (BitVector 4)
+stepperMotor in' =  register 0 (output in')
   where
-    output = register 0 $ driverOutput <$> state
-    state = register 0 $ next <$> dir <*> en <*> state
+    output = flip mealy 0 $ \s (dir,en) ->
+                             let n = next dir en s
+                             in (n,driverOutput n)
     
 
-topEntity :: Signal Bool -> Signal Bool -> Signal (BitVector 4)
+topEntity :: Signal (Bool,Bool) -> Signal (BitVector 4)
 topEntity = stepperMotor
 
---testInput :: Signal (Signed 16)
---testInput = stimuliGenerator (2:>3:>(-2):>8:>Nil)
+testInput :: Signal (Bool,Bool)
+testInput = stimuliGenerator $
+  (True,False):>(True,True):>(True,True):>(True,True):>(True,True):>(True,True):>(True,True):>Nil
 
---expectedOutput :: Signal (Signed 16) -> Signal Bool
---expectedOutput = outputVerifier (4:>12:>1:>20:>Nil)
+expectedOutput :: Signal (BitVector 4) -> Signal Bool
+expectedOutput = outputVerifier $
+  0b0000:>0b0000:>0b0001:>0b0010:>0b0100:>0b1000:>0b0001:>Nil
