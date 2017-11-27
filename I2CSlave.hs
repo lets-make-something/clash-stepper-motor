@@ -22,12 +22,16 @@ posReg =
   flip mealy True $
   \p c -> (c,(not p) && c)
 
+shiftL' :: BitVector 8 -> Bit -> BitVector 8
+shiftL' a b = slice d7 d0 $ a ++# b
+
 shiftReg :: Signal (Bool,Bool) -> Signal (BitVector 8)
 shiftReg = flip mealy (0) $
   \(reg) (enb,bit) ->
     let nxt = if enb then (shiftL reg 1) .|. (if bit then 1 else 0) else reg
     in (nxt,reg)
 
+{-# INLINE ifp #-}
 ifp :: Signal Bool -> Signal a -> Signal a -> Signal a
 ifp a b c = if' <$> a <*> b <*> c
   where
@@ -37,8 +41,8 @@ i2cSlave :: Signal (Bool,Bool,   --- ^ scl_in,sda_in
                     BitVector 7, --- ^ dev_adr
                     BitVector 8) --- ^ tx_data
          -> Signal (Bool,        --- ^ sda_out
-                    Bool,        --- ^ enb
-                    Bool,        --- ^ enb
+                    Bool,        --- ^ adr_enb
+                    Bool,        --- ^ dat_enb
                     Bool,        --- ^ wr
                     BitVector 7, --- ^ adr
                     BitVector 8) --- ^ rx_data
