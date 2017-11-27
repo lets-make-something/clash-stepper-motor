@@ -1,6 +1,6 @@
 // Automatically generated Verilog-2001
-module StepperMotor_driverOutput(stat
-                                ,result);
+module Top_driverOutput(stat
+                       ,result);
   input [2:0] stat;
   output [3:0] result;
   reg [3:0] result_reg;

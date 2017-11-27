@@ -1,8 +1,8 @@
 // Automatically generated Verilog-2001
-module StepperMotor_next(dir
-                        ,en
-                        ,state
-                        ,result);
+module Top_next(dir
+               ,en
+               ,state
+               ,result);
   input [0:0] dir;
   input [0:0] en;
   input [2:0] state;
