@@ -1,6 +1,8 @@
 module StepperMotor where
 
-import CLaSH.Prelude
+import Clash.Prelude
+import Clash.Signal
+
 
 next :: Bool -> Bool -> BitVector 3 -> BitVector 3
 next dir en state =
@@ -42,21 +44,28 @@ driverOutput stat =
     4 -> 0b1000
     _ -> 0b0000
 
-stepperMotor :: Signal (Bool,Bool) -> Signal (BitVector 4)
-stepperMotor in' =  register 0 (output in')
+stepperMotor :: HasClockReset domain gated synchronous
+             => Signal domain (Bool,Bool) -> Signal domain (BitVector 4)
+stepperMotor in' = register 0 (output in')
   where
     output = flip mealy 0 $ \s (dir,en) ->
                              let n = next dir en s
                              in (n,driverOutput n)
     
 
-topEntity :: Signal (Bool,Bool) -> Signal (BitVector 4)
+topEntity :: SystemClockReset
+          => Signal System (Bool,Bool) -> Signal System (BitVector 4)
 topEntity = stepperMotor
 
-testInput :: Signal (Bool,Bool)
+{-
+testInput :: SystemClockReset
+          => Signal System (Bool,Bool)
 testInput = stimuliGenerator $
   (True,False):>(True,True):>(True,True):>(True,True):>(True,True):>(True,True):>(True,True):>Nil
 
-expectedOutput :: Signal (BitVector 4) -> Signal Bool
+expectedOutput :: SystemClockReset
+               => Signal System (BitVector 4) -> Signal System Bool
 expectedOutput = outputVerifier $
   0b0000:>0b0000:>0b0001:>0b0010:>0b0100:>0b1000:>0b0001:>Nil
+
+-}
