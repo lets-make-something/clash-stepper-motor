@@ -30,20 +30,10 @@ module Top_topEntity
     , output wire [3:0] result_1_17
     , output wire [3:0] result_1_18
     , output wire [3:0] result_1_19
-    , output wire [3:0] result_1_20
-    , output wire [3:0] result_1_21
-    , output wire [3:0] result_1_22
-    , output wire [3:0] result_1_23
-    , output wire [3:0] result_1_24
-    , output wire [3:0] result_1_25
-    , output wire [3:0] result_1_26
-    , output wire [3:0] result_1_27
-    , output wire [3:0] result_1_28
-    , output wire [3:0] result_1_29
     );
   wire [0:0] x;
   wire [0:0] y;
-  wire [59:0] regs;
+  wire [39:0] regs;
   wire [16:0] ds;
   wire [7:0] d1;
   wire [6:0] c1;
@@ -61,21 +51,21 @@ module Top_topEntity
   wire [6:0] c1_0;
   wire [0:0] b1_0;
   wire [0:0] a1_0;
-  wire [67:0] tup_0;
+  wire [47:0] tup_0;
   wire [7:0] x_6;
-  wire [59:0] y_0;
-  wire [86:0] result_2;
+  wire [39:0] y_0;
+  wire [66:0] result_2;
   wire [0:0] sda_out;
-  wire [119:0] \#app_arg ;
+  wire [79:0] \#app_arg ;
   wire [1:0] \#arg ;
   wire [1:0] \#arg_2 ;
   wire [1:0] tup_fun_arg;
   wire [16:0] tup_fun_arg_0;
   wire [1:0] tup_0_fun_arg;
   wire [16:0] tup_0_fun_arg_0;
-  wire [59:0] \#vec ;
-  wire [120:0] result;
-  wire [119:0] result_1;
+  wire [39:0] \#vec ;
+  wire [80:0] result;
+  wire [79:0] result_1;
 
   assign \#arg  = {\#arg_0 ,\#arg_1 };
 
@@ -85,7 +75,7 @@ module Top_topEntity
 
   assign y = \#arg_2 [0:0];
 
-  assign regs = result_2[59:0];
+  assign regs = result_2[39:0];
 
   assign ds = {x,y,7'b0000000,x_6};
 
@@ -138,9 +128,9 @@ module Top_topEntity
   ,.\$d(%,%)  (tup_0_fun_arg)
   ,.eta2 (tup_0_fun_arg_0));
 
-  assign x_6 = tup_0[67:60];
+  assign x_6 = tup_0[47:40];
 
-  assign y_0 = tup_0[59:0];
+  assign y_0 = tup_0[39:0];
 
   assign result_2 = {x_5
                     ,x_4
@@ -151,14 +141,14 @@ module Top_topEntity
                     ,x_6
                     ,y_0};
 
-  assign sda_out = result_2[86:86];
+  assign sda_out = result_2[66:66];
 
   assign \#vec  = (regs);
 
   // map begin
   genvar i;
   generate
-  for (i=0; i < 30; i = i + 1) begin : map
+  for (i=0; i < 20; i = i + 1) begin : map
     wire [1:0] map_in;
     wire [3:0] map_out;
 
@@ -174,68 +164,48 @@ module Top_topEntity
 
   assign result = {sda_out,\#app_arg };
 
-  assign result_0 = result[120:120];
+  assign result_0 = result[80:80];
 
-  assign result_1 = result[119:0];
+  assign result_1 = result[79:0];
 
-  assign result_1_0 = result_1[119:116];
+  assign result_1_0 = result_1[79:76];
 
-  assign result_1_1 = result_1[115:112];
+  assign result_1_1 = result_1[75:72];
 
-  assign result_1_2 = result_1[111:108];
+  assign result_1_2 = result_1[71:68];
 
-  assign result_1_3 = result_1[107:104];
+  assign result_1_3 = result_1[67:64];
 
-  assign result_1_4 = result_1[103:100];
+  assign result_1_4 = result_1[63:60];
 
-  assign result_1_5 = result_1[99:96];
+  assign result_1_5 = result_1[59:56];
 
-  assign result_1_6 = result_1[95:92];
+  assign result_1_6 = result_1[55:52];
 
-  assign result_1_7 = result_1[91:88];
+  assign result_1_7 = result_1[51:48];
 
-  assign result_1_8 = result_1[87:84];
+  assign result_1_8 = result_1[47:44];
 
-  assign result_1_9 = result_1[83:80];
+  assign result_1_9 = result_1[43:40];
 
-  assign result_1_10 = result_1[79:76];
+  assign result_1_10 = result_1[39:36];
 
-  assign result_1_11 = result_1[75:72];
+  assign result_1_11 = result_1[35:32];
 
-  assign result_1_12 = result_1[71:68];
+  assign result_1_12 = result_1[31:28];
 
-  assign result_1_13 = result_1[67:64];
+  assign result_1_13 = result_1[27:24];
 
-  assign result_1_14 = result_1[63:60];
+  assign result_1_14 = result_1[23:20];
 
-  assign result_1_15 = result_1[59:56];
+  assign result_1_15 = result_1[19:16];
 
-  assign result_1_16 = result_1[55:52];
+  assign result_1_16 = result_1[15:12];
 
-  assign result_1_17 = result_1[51:48];
+  assign result_1_17 = result_1[11:8];
 
-  assign result_1_18 = result_1[47:44];
+  assign result_1_18 = result_1[7:4];
 
-  assign result_1_19 = result_1[43:40];
-
-  assign result_1_20 = result_1[39:36];
-
-  assign result_1_21 = result_1[35:32];
-
-  assign result_1_22 = result_1[31:28];
-
-  assign result_1_23 = result_1[27:24];
-
-  assign result_1_24 = result_1[23:20];
-
-  assign result_1_25 = result_1[19:16];
-
-  assign result_1_26 = result_1[15:12];
-
-  assign result_1_27 = result_1[11:8];
-
-  assign result_1_28 = result_1[7:4];
-
-  assign result_1_29 = result_1[3:0];
+  assign result_1_19 = result_1[3:0];
 endmodule
 

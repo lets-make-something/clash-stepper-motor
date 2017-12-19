@@ -7,11 +7,11 @@ module Top_stepperReg
     , input [16:0] eta2
 
       // Outputs
-    , output wire [247:0] result
+    , output wire [167:0] result
     );
-  reg [239:0] regs;
-  reg [239:0] result_0;
-  wire [239:0] result_1;
+  reg [159:0] regs;
+  reg [159:0] result_0;
+  wire [159:0] result_1;
   reg [0:0] result_2;
   wire signed [63:0] wild;
   wire signed [63:0] \#wild_app_arg ;
@@ -22,7 +22,7 @@ module Top_stepperReg
   // register begin
   always @(posedge \$d(%,%) [1:1] or posedge \$d(%,%) [0:0]) begin : Top_stepperReg_register
     if (\$d(%,%) [0:0]) begin
-      regs <= ({30 {8'b00000000}});
+      regs <= ({20 {8'b00000000}});
     end else begin
       regs <= result_0;
     end
@@ -37,19 +37,19 @@ module Top_stepperReg
   end
 
   // replaceVec start
-  reg [7:0] vec [0:30-1];
+  reg [7:0] vec [0:20-1];
   integer i;
   always @(*) begin
-    for (i=0;i<30;i=i+1) begin
-      vec[30-1-i] = regs[i*8+:8];
+    for (i=0;i<20;i=i+1) begin
+      vec[20-1-i] = regs[i*8+:8];
     end
     vec[(wild)] = x;
   end
 
   genvar i_0;
   generate
-  for (i_0=0;i_0<30;i_0=i_0+1) begin : mk_vec
-    assign result_1[i_0*8+:8] = vec[(30-1)-i_0];
+  for (i_0=0;i_0<20;i_0=i_0+1) begin : mk_vec
+    assign result_1[i_0*8+:8] = vec[(20-1)-i_0];
   end
   endgenerate
   // replaceVec end
