@@ -7,12 +7,12 @@ module Top_stepperReg_0
     , input [16:0] eta2
 
       // Outputs
-    , output wire [47:0] result
+    , output wire [43:0] result
     );
-  wire [39:0] \#app_arg ;
+  wire [35:0] \#app_arg ;
   wire [7:0] x;
-  wire [159:0] y;
-  wire [167:0] ds;
+  wire [143:0] y;
+  wire [151:0] ds;
   wire [1:0] ds_fun_arg;
 
   assign result = {x,\#app_arg };
@@ -20,7 +20,7 @@ module Top_stepperReg_0
   // map begin
   genvar i;
   generate
-  for (i=0; i < 20; i = i + 1) begin : map
+  for (i=0; i < 18; i = i + 1) begin : map
     wire [7:0] map_in;
     wire [1:0] map_out;
 
@@ -32,9 +32,9 @@ module Top_stepperReg_0
   endgenerate
   // map end
 
-  assign x = ds[167:160];
+  assign x = ds[151:144];
 
-  assign y = ds[159:0];
+  assign y = ds[143:0];
 
   assign ds_fun_arg = {\$d(%,%) [1:1]
                       ,\$d(%,%) [0:0]};
